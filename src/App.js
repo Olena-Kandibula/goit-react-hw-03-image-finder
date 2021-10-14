@@ -7,10 +7,7 @@ import ImageGallery from './components/ImageGallery/ImageGallery';
 
 class App extends Component {
   state = {
-    searchQuery: '',
-    // ====
-    // images: [],
-    loaging: false,
+    searchQuery: '',  
 
   }
 
@@ -60,6 +57,7 @@ class App extends Component {
     
     return (
       <div className="App">
+        
       <Searchbar onSubmit={this.formSubmitHandler}>
         </Searchbar>
         
@@ -68,16 +66,7 @@ class App extends Component {
           
       </ImageGallery>
         
-        {/* <ul>
-          {this.state.loaging&& <h1>loading</h1>}
-          {this.state.images.map(image => (
-           
-                 <li className="ImageGalleryItem" key={image.id}> 
-                 <img src={image.previewURL} alt={image.tags} className="ImageGalleryItem-image" /> 
-             
-             </li> 
-           ))} 
-        </ul> */}
+        
       </div>
     )
   };
