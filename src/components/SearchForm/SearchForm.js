@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import s from '../Searchbar/Searchbar.module.css';
+
+
+import s from '../SearchForm/SearchForm.module.css';
 import { BiSearchAlt } from 'react-icons/bi';
+
 
 class SearchForm extends Component {
     
-    state = {
-        
+    state = {        
         searchQuery : '',
     }
+      
 
     handleChange = e => {
     const { value } = e.currentTarget;
@@ -25,26 +28,30 @@ class SearchForm extends Component {
       e.preventDefault();
       const { searchQuery } = this.state;
 
-    const newSearch =         
-        searchQuery.trim().toLowerCase();
-      
+    const newSearch = searchQuery.trim().toLowerCase();
+    //   console.log(searchQuery)
+      if (newSearch === '') {
+          alert('Input is empty');
+          return;
+      }
+
      this.props.onSubmit(newSearch);
     
     this.reset();
     };
     
     render() {
-        return (
-            <form onSubmit={this.handleSubmit}
-            className={s.searchForm}>
-                <button
-                    type="submit"
-                    className={s.searchFormButton}
-                >
-                    <BiSearchAlt size="20" />
-                    <span className={s.searchFormButtonLabel}
+        return (            
+                <form onSubmit={this.handleSubmit}
+                    className={s.searchForm}>
+                    <button
+                        type="submit"
+                        className={s.searchFormButton}
                     >
-                    Search
+                        <BiSearchAlt size="20" />
+                        <span className={s.searchFormButtonLabel}
+                        >
+                        Search
                         </span>
                     </button>
 
@@ -62,16 +69,17 @@ class SearchForm extends Component {
 
                 </form>
 
-           
+                
+
+            
 
         );
     }
 
 }
 
-
+export default SearchForm;
 
 SearchForm.prototypes = {
 onSubmit: PropTypes.func,
 }
-export default SearchForm;

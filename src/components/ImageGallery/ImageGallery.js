@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Loader from "react-loader-spinner";
 
 import imagesAPI from '../../APIService/APIservice';
-import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem1';
+import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
 import ImagesError from '../../ImagesError/ImagesError';
 import Button from '../Button/Button';
 
@@ -52,7 +52,7 @@ class ImageGallery extends Component {
                     if (images.total !== 0) {                       
                         
                         this.setState({
-                            imagesTotal: images.total,
+                            imagesTotal: images.totalHits,
                             searchQuery: nextQuery,
                         })
 
@@ -85,8 +85,8 @@ class ImageGallery extends Component {
         });
         // console.log(prevProps)
         //  console.log(prevProps)
-        const {  searchQuery } = this.state;
-        let nextPage = this.state.currentPage +1 ;
+        const {  searchQuery, currentPage } = this.state;
+        let nextPage = currentPage +1 ;
         // let nextNextPage =nextPage + 1;
  
     imagesAPI

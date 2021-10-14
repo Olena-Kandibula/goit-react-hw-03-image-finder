@@ -1,39 +1,78 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import shortid from 'shortid';
+import Modal from '../Modal/Modal';
 
-
-// import Modal from '../Modal';
 import s from './ImageGalleryItem.module.css';
 
+class ImageGalleryItem extends Component {
 
-  
-function ImageGalleryItem ({images:{id, tag, largeImageURL, webformatURL }}) {
+  state = {
 
-//   let id = shortid.generate();
-// console.log('shortid', id)
+    stateModal: false,
+    urlImgModal:'',
+  };
 
+  openModal = e => {
+
+    this.setState({
+
+      stateModal: true,
+      urlImgModal:e.target.dataset.url});
+    
+    // console.log(e.target.dataset.url);
+    // console.log(e.key)
+    
+  };
+
+  closeModal = e => {
+
+    this.setState({
+      stateModal: false
+
+    });
+    // console.log(e.key)
+
+  };
+
+  render() {
       return (
         <>
-            {this.props.images.map(image => (
-              <li className={s.imageGalleryItem}
-                // key =  {id}
-                key={image.id}
-              >
+          {this.props.images.map(image => (
+              
+                <li className ={s.imageGalleryItem}
+                    key={image.id}
+                    >
                     <img
-                          // onClick={this.openModal}
+                          onClick={this.openModal}
                         className={s.imageGalleryItemImage}
                 
-                        data-set={image.largeImageURL}                          
+                        data-url={image.largeImageURL}                          
                         src={image.webformatURL} 
                         alt={image.tag} 
                     />
                 </li>
             ))}
-         </>     
-        
-  )
+              
+          {this.state.stateModal && (
+            
+            <Modal
+              closeModal={this.closeModal}
+            >
+              
+            <img
+              src={this.state.urlImgModal}
+              alt=""
+              
+            />
+          </Modal>
+        )}
+              
+
+
+        </>    
+          );     
+  }
 }
 
 ImageGalleryItem.protoType = {

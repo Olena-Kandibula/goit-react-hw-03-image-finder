@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-
+// import SearchForm from '../SearchForm/SearchForm'
 
 import s from '../Searchbar/Searchbar.module.css';
 import { BiSearchAlt } from 'react-icons/bi';
@@ -39,6 +39,11 @@ class Searchbar extends Component {
     
     this.reset();
     };
+
+//     formSubmitHandler = newSearch => {
+    
+//     this.setState({searchQuery: newSearch})
+//   };
     
     render() {
         return (
@@ -50,7 +55,7 @@ class Searchbar extends Component {
                             alt="Pixabay" width="48"                            
                         />
                     </a>
-    </div>
+                </div>
                 <form onSubmit={this.handleSubmit}
                     className={s.searchForm}>
                     <button
@@ -78,6 +83,9 @@ class Searchbar extends Component {
 
                 </form>
 
+                {/* <SearchForm
+                    onSubmit={this.formSubmitHandler}
+                /> */}
                 
 
             </header>
