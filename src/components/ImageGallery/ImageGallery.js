@@ -102,7 +102,7 @@ class ImageGallery extends Component {
     
 
     render() {
-        const { images, error, status, imagesTotal, currentPage } = this.state;
+        const { images, status, imagesTotal, currentPage } = this.state;
         
         const { searchQuery } = this.props;
         
@@ -125,7 +125,8 @@ class ImageGallery extends Component {
         if (status === 'rejected') {
 
             return <ImagesError                
-                errorSearchQuery={searchQuery}
+                errorQuery={searchQuery}
+                
             />            
         }
 
