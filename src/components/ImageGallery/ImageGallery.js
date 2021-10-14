@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Loader from "react-loader-spinner";
 
+import imagesAPI from '../../APIService/APIservice';
 import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem1';
 import ImagesError from '../../ImagesError/ImagesError';
 import Button from '../Button/Button';
@@ -13,7 +14,7 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import sb from '../Button/Button.module.css';
 
 
-import imagesAPI from '../../APIService/APIservice';
+
 
 class ImageGallery extends Component {
 
