@@ -109,7 +109,7 @@ class ImageGallery extends Component {
         const availablePages = Math.ceil(imagesTotal/12);       
         
         if (status === 'idle') {
-            return <div>input name</div>
+            return <div>Input search name, please</div>
         }
 
         if (status === 'pending') {           
@@ -152,10 +152,8 @@ class ImageGallery extends Component {
 
             if (status === 'resolved' || availablePages ===1 ) {
             
-                return (
-                
-                <ul className={s.imageGallery}>
-                 
+                return (                
+                    <ul className={s.imageGallery}>                 
                         <ImageGalleryItem                            
                             images={images}                            
                         />               
