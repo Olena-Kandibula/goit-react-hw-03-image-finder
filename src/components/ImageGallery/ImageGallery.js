@@ -11,9 +11,6 @@ import Button from '../Button/Button';
 import s from '../ImageGallery/ImageGallery.module.css';
 import sl from '../Loader/Loader.module.css';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-import sb from '../Button/Button.module.css';
-
-
 
 
 class ImageGallery extends Component {
@@ -32,10 +29,11 @@ class ImageGallery extends Component {
         const prevQuery = prevProps.searchQuery;
         const nextQuery = this.props.searchQuery;
         
-        const { currentPage, searchQuery } = this.state;
-        // let currentPage = 1;
+        const { currentPage } = this.state;
         
-        if (prevQuery !== nextQuery) {            
+        
+        if (prevQuery !== nextQuery) {
+            
             this.setState({
                 status: 'pending',
                 currentPage: 1,
@@ -43,12 +41,10 @@ class ImageGallery extends Component {
             
             
             imagesAPI
-                .fetchImg(nextQuery,currentPage)
+                .fetchImg(nextQuery, currentPage)
                 
-                // .then(images => this.setState({ imagesTotal: images.total })
-                // )
-        
                 .then(images => {
+
                     if (images.total !== 0) {                       
                         
                         this.setState({
@@ -61,60 +57,56 @@ class ImageGallery extends Component {
                             status: 'resolved',
                         });
                     }
+
                     return this.setState({  status: 'rejected' });
-            })
+                })
                 // .catch(error => console.warn(error))
-            .catch(error => this.setState({error, status: 'rejected'}))
+                .catch(error => this.setState({error, status: 'rejected'}))
                          
         }
-
- 
-        // console.log('prevState', prevState.currentPage)
-        // console.log('this.state', this.state.currentPage)
-        //  console.log('prevState', prevState.searchQuery)
-        // console.log('this.state', this.state.searchQuery)
-
        
     }
 
     addImages = () => {
 
-        this.setState({
-            status: 'pending',
-            // currentPage: currentPage += 1,
-        });
-        // console.log(prevProps)
-        //  console.log(prevProps)
+        this.setState({ status: 'pending'});
+       
         const {  searchQuery, currentPage } = this.state;
-        let nextPage = currentPage +1 ;
-        // let nextNextPage =nextPage + 1;
- 
-    imagesAPI
-      .fetchImg(searchQuery, nextPage)
-      .then(data => {
-        this.setState(prevState => {
-          return {
-            images: [...prevState.images, ...data.hits],
-            status: 'resolved',            
-            currentPage: nextPage,
-          };
-        });
-      })
-        .finally(() => {
-            window.scrollTo({
-            top: document.documentElement.scrollHeight,
-            behavior: 'smooth',
-          });        
-      });
-  };
+        let nextPage = currentPage + 1;
+        
+        imagesAPI
+        
+            .fetchImg(searchQuery, nextPage)
+            
+            .then(data => {
+          
+                this.setState(prevState => {
+                    
+                    return {              
+                        images: [...prevState.images, ...data.hits],                        
+                        status: 'resolved',            
+                        currentPage: nextPage,
+            
+                    };                    
+                });           
+                
+            })
+            
+            .finally(() => {            
+                window.scrollTo({                
+                    top: document.documentElement.scrollHeight,                    
+                    behavior: 'smooth',            
+                });                
+            });        
+    };
+    
 
     render() {
         const { images, error, status, imagesTotal, currentPage } = this.state;
-        // const total = this.state.imagesTotal;
+        
         const { searchQuery } = this.props;
         
-        const availablePages = Math.ceil(imagesTotal/12);
-        // console.log(availablePages);
+        const availablePages = Math.ceil(imagesTotal/12);       
         
         if (status === 'idle') {
             return <div>input name</div>
@@ -132,7 +124,7 @@ class ImageGallery extends Component {
 
         if (status === 'rejected') {
 
-            return <ImagesError
+            return <ImagesError                
                 errorSearchQuery={searchQuery}
             />            
         }
@@ -141,52 +133,40 @@ class ImageGallery extends Component {
             
             return (
                 <>
-                    <ul className={s.imageGallery}>
-                 
+                    <ul className={s.imageGallery}>                 
                         <ImageGalleryItem
                             images={images}
-                        />
-                
+                        />                
                     </ul>
                 
                     <Button
                         pages={availablePages}
-                         currentPage={currentPage}
-                    addImages ={this.addImages}
-                        
-                    />
-                    
-                </>
-                
-            );
+                        currentPage={currentPage}                        
+                        addImages={this.addImages}                         
+                    />                    
+                </>                
+            );            
         }
 
+
             if (status === 'resolved' || availablePages ===1 ) {
-             console.log("=1")
-            return (
+            
+                return (
                 
                 <ul className={s.imageGallery}>
                  
-                 <ImageGalleryItem
-                     images={images}
-                />
-                
-                </ul>
-                
-                    
-                
+                        <ImageGalleryItem                            
+                            images={images}                            
+                        />               
+                </ul>                
             );
-
-        }
+        }       
         
-        
-    }
-    
+    }    
 }
     
-ImageGallery.prototypes = {
-    searchQuery:PropTypes.string
-    
+ImageGallery.prototypes = {    
+    searchQuery:PropTypes.string    
 }
 
 export default ImageGallery;

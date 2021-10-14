@@ -5,10 +5,10 @@ import Modal from '../Modal/Modal';
 
 import s from './ImageGalleryItem.module.css';
 
+
 class ImageGalleryItem extends Component {
 
   state = {
-
     stateModal: false,
     urlImgModal:'',
   };
@@ -18,20 +18,18 @@ class ImageGalleryItem extends Component {
     this.setState({
 
       stateModal: true,
-      urlImgModal:e.target.dataset.url});
-    
-    // console.log(e.target.dataset.url);
-    // console.log(e.key)
+      urlImgModal: e.target.dataset.url
+    });
     
   };
 
   closeModal = e => {
 
     this.setState({
-      stateModal: false
 
-    });
-    // console.log(e.key)
+      stateModal: false
+      
+    });    
 
   };
 
@@ -40,18 +38,19 @@ class ImageGalleryItem extends Component {
         <>
           {this.props.images.map(image => (
               
-                <li className ={s.imageGalleryItem}
-                    key={image.id}
-                    >
-                    <img
-                          onClick={this.openModal}
-                        className={s.imageGalleryItemImage}
-                
-                        data-url={image.largeImageURL}                          
-                        src={image.webformatURL} 
-                        alt={image.tag} 
-                    />
-                </li>
+            <li className ={s.imageGalleryItem}
+              key={image.id}
+            >
+              <img
+                onClick={this.openModal}
+                className={s.imageGalleryItemImage}
+                data-url={image.largeImageURL}
+                src={image.webformatURL} 
+                alt={image.tag} 
+              />
+
+            </li>
+
             ))}
               
           {this.state.stateModal && (
@@ -66,12 +65,12 @@ class ImageGalleryItem extends Component {
               
             />
           </Modal>
-        )}
-              
-
-
-        </>    
-          );     
+          )}
+          
+        </>
+        
+    );
+    
   }
 }
 

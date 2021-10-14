@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-// import SearchForm from '../SearchForm/SearchForm'
-
 import s from '../Searchbar/Searchbar.module.css';
 import { BiSearchAlt } from 'react-icons/bi';
 
@@ -11,44 +9,43 @@ class Searchbar extends Component {
     
     state = {        
         searchQuery : '',
-    }
-      
+    }      
 
     handleChange = e => {
     const { value } = e.currentTarget;
-    this.setState({searchQuery: value});
-    
-  };
+        this.setState({ searchQuery: value });
+        
+    };
 
-  reset = () => {
-    this.setState({ searchQuery: '' });
-  };
+    reset = () => {
+        this.setState({ searchQuery: '' });
+    };
 
-  handleSubmit = e => {
-      e.preventDefault();
+    handleSubmit = e => {
+
+        e.preventDefault();
+        
       const { searchQuery } = this.state;
 
-    const newSearch =         
-          searchQuery.trim().toLowerCase();
-    //   console.log(searchQuery)
+      const newSearch = searchQuery.trim().toLowerCase();
+        
       if (newSearch === '') {
           alert('Input is empty');
           return;
-      }
-     this.props.onSubmit(newSearch);
-    
-    this.reset();
-    };
+        }
 
-//     formSubmitHandler = newSearch => {
+        this.props.onSubmit(newSearch);
     
-//     this.setState({searchQuery: newSearch})
-//   };
+        this.reset();
+        
+    };
     
     render() {
+
         return (
 
             <header className={s.searchbar}>
+
                 <div className={s.logo}>
                     <a href="https://pixabay.com/">
                         <img src="https://pixabay.com/static/img/public/medium_rectangle_a.png"
@@ -56,8 +53,10 @@ class Searchbar extends Component {
                         />
                     </a>
                 </div>
+
                 <form onSubmit={this.handleSubmit}
                     className={s.searchForm}>
+                    
                     <button
                         type="submit"
                         className={s.searchFormButton}
@@ -81,16 +80,11 @@ class Searchbar extends Component {
                         placeholder="Search images and photos"
                     />
 
-                </form>
-
-                {/* <SearchForm
-                    onSubmit={this.formSubmitHandler}
-                /> */}
-                
+                </form>                 
 
             </header>
 
-        );
+        );        
     }
 
 }

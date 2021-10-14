@@ -1,15 +1,13 @@
 import PropTypes from 'prop-types';
 import s from './Button.module.css';
 
+
 function Button({ addImages, pages, currentPage }) {
-    console.log('pages button = availablePages', pages)
-    // console.log('max pages button', Math.ceil(pages / 12))
-    // const maxMages = Math.ceil(pages / 12);
-    // console.log('maxMages', maxMages)
-    const message = (currentPage < pages) ? 'Load more...' : "That's all";
-// console.log('currentPage',currentPage)
-    const disabled = (currentPage < pages) ? false : true;
-    // console.log(disabled)
+        
+  const message = (currentPage < pages) ? 'Load more...' : "That's all";
+
+  const disabled = (currentPage < pages) ? false : true;
+  
   return (
     <button
           type="button"
@@ -18,7 +16,8 @@ function Button({ addImages, pages, currentPage }) {
           disabled = { disabled}
       >
          
-        {message}
+      {message}
+      
     </button>
   );
 }

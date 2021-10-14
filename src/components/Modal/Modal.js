@@ -13,8 +13,7 @@ class Modal extends Component {
     }
 
     escFunction(event){
-        if(event.keyCode === 27) {
-      
+        if(event.keyCode === 27) {      
             this.props.closeModal();
         }
     }
@@ -31,21 +30,18 @@ class Modal extends Component {
 
         return createPortal(
             
-        <div
-                className={s.overlay}
-                
+            <div className={s.overlay}
             >
-            <div
-                    className={s.modal}
+                <div className={s.modal}
                 >
                     {this.props.children}
                     
                 </div>
                 
-            </div>,
-            
+            </div>,    
         
-        document.getElementById('modal-root'),
+            document.getElementById('modal-root'),
+        
         );
         
     }
